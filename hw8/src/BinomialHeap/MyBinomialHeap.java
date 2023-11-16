@@ -50,8 +50,8 @@ public class MyBinomialHeap<K extends Comparable<K>, V> implements IBinomialHeap
     BinomialTreeNode<K, V> res = null; // res the left sibling of the min node
     BinomialTreeNode<K, V> pre = null;
     BinomialTreeNode<K, V> minNode = this.head;
+    K min = minNode.getKey();
     BinomialTreeNode<K, V> current = this.head;
-    K min = head.getKey();
     while (current != null) {
       if (current.getKey().compareTo(min) < 0) {
         min = current.getKey();
@@ -61,33 +61,51 @@ public class MyBinomialHeap<K extends Comparable<K>, V> implements IBinomialHeap
       pre = current;
       current = current.getSibling();
     }
-    // remove res from root list
+    // remove minNode from root list
     if (res == null) {
       this.head = this.head.getSibling();
     } else {
-      pre.setSibling(minNode.getSibling());
+      res.setSibling(minNode.getSibling());
     }
-    BinomialTreeNode<K, V> last = minNode.getChild();
-    BinomialTreeNode<K, V> next
-    for (int i = 0; i < minNode.getDegree()-1; ++i) {
-      BinomialTreeNode<K, V> now = last.getSibling();
-      BinomialTreeNode<K, V> next = now.getSibling();
-      now.setSibling(last);
-      last = now;
+    BinomialTreeNode<K, V> now = minNode.getChild() == null? null: minNode.getChild().getSibling();
+    BinomialTreeNode<K, V> rest = now == null ? null : now.getSibling();
+    BinomialTreeNode<K, V> ordered = minNode.getChild();
+    if (ordered != null) ordered.setSibling(null);
+    while (now != null) {
+      now.setSibling(ordered);
+      ordered = now;
+      now = rest;
+      rest = rest.getSibling();
     }
-
-
-    return res;
+    IBinomialHeap<K, V> h = new MyBinomialHeap<>(ordered);
+    this.head = IBinomialHeap.heapUnion(this, h).getHead();
+    return minNode;
   }
 
   @Override
   public void decreaseKey(BinomialTreeNode<K, V> node, K key) {
-
+    if (key.compareTo(node.getKey()) < 0) {
+      node.setKey(key);
+      BinomialTreeNode<K, V> y = node;
+      BinomialTreeNode<K, V> z = y.getParent();
+      while (z != null && y.getKey().compareTo(z.getKey()) < 0) {
+        // exchange z ang y
+        K zKey = z.getKey();
+        V zVal = z.getVal();
+        z.setKey(y.getKey());
+        z.setVal(y.getVal());
+        y.setKey(zKey);
+        y.setVal(zVal);
+        y = z;
+        z = y.getParent();
+      }
+    }
   }
 
   @Override
-  public void delete(BinomialTreeNode<K, V> node) {
-
+  public void delete(BinomialTreeNode<K, V> node, K minKey) {
+    decreaseKey(node, minKey);
+    extractMin();
   }
 
   @Override
@@ -100,4 +118,14 @@ public class MyBinomialHeap<K extends Comparable<K>, V> implements IBinomialHeap
     this.head = newHead;
   }
 
+  public static void main(String[] args) {
+    MyBinomialHeap<Integer, String> heap = new MyBinomialHeap<>();
+    BinomialTreeNode<Integer, String> node1 = new BinomialTreeNode<>(5, "5");
+    heap.insert(node1);
+    BinomialTreeNode<Integer, String> node2 = new BinomialTreeNode<>(2, "2");
+    heap.insert(node2);
+    heap.decreaseKey(node1, 1);
+    BinomialTreeNode<Integer, String> min = heap.extractMin();
+    heap.delete(node2, -100);
+  }
 }

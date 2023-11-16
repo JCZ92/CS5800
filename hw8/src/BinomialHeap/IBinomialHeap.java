@@ -63,8 +63,8 @@ public interface IBinomialHeap<K extends Comparable<K>, V> {
    * @return the united binomial heap
    */
   static <K extends Comparable<K>, V> IBinomialHeap<K, V> heapUnion(IBinomialHeap<K, V> h1, IBinomialHeap<K, V> h2) {
-    if (h1 == null) return h2;
-    if (h2 == null) return h1;
+    if (h1.getHead() == null) return h2;
+    if (h2.getHead() == null) return h1;
     IBinomialHeap<K, V> res = heapMerge(h1, h2);
     BinomialTreeNode<K, V> prev = null;
     BinomialTreeNode<K, V> cur = res.getHead();
@@ -113,9 +113,11 @@ public interface IBinomialHeap<K extends Comparable<K>, V> {
 
   /**
    * Delete a node in the binomial heap.
-   * @param node to delete
+   *
+   * @param node   to delete
+   * @param minKey a key small enough to make sure delete is successful
    */
-  void delete(BinomialTreeNode<K, V> node);
+  void delete(BinomialTreeNode<K, V> node, K minKey);
 
   /**
    * @return head of the binomial heap.
