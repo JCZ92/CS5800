@@ -305,7 +305,7 @@ class RedBlackTree<K extends Comparable<K>, V> implements IBST<K, V> {
 //    System.out.println("Predecessor of " + node5.getVal() + " is "  + node5.predecessor(bst2.sentinel));
 //    System.out.println("Successor of " + node2.getVal() + " is "  + node2.successor(bst2.sentinel));
 //    System.out.println("Successor of " + node5.getVal() + " is "  + node5.successor(bst2.sentinel));
-    String filePath = "int.txt";
+    String filePath = "./hw8/int.txt";
     List<Integer> ints = readIntegersFromFile(filePath);
     RedBlackTree<Integer, String> bst = new RedBlackTree<Integer, String>();
     for (int i : ints) {

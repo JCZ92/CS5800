@@ -182,49 +182,49 @@ public class MyHashTable implements IHashTable {
     }
   }
   public static void main(String[] args) {
-    int[] test = new int[] {30, 300, 3000};
-    for (int i : test) {
-      MyHashTable ht = new MyHashTable(i);
-      String filePathString = "./alice_in_wonderland.txt";
-
-      Path filePath = Paths.get(filePathString);
-
-      try {
-        // Read all lines from the file
-        List<String> lines = Files.readAllLines(filePath, StandardCharsets.ISO_8859_1);
-        // Parse each word from the lines
-        for (String line : lines) {
-          List<String> words =  Arrays.stream(line.split("\\s+"))
-                  .map(word -> word.replaceAll("[^a-zA-Z]", "")) //remove punctuations
-                  .filter(word -> !word.isEmpty()).collect(Collectors.toList());
-          for (String word: words) {
-            ht.increase(word);
-          }
-        }
-        ht.summarize("output" + i);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
+//    int[] test = new int[] {30, 300, 3000};
+//    for (int i : test) {
+//      MyHashTable ht = new MyHashTable(i);
+//      String filePathString = "./alice_in_wonderland.txt";
+//
+//      Path filePath = Paths.get(filePathString);
+//
+//      try {
+//        // Read all lines from the file
+//        List<String> lines = Files.readAllLines(filePath, StandardCharsets.ISO_8859_1);
+//        // Parse each word from the lines
+//        for (String line : lines) {
+//          List<String> words =  Arrays.stream(line.split("\\s+"))
+//                  .map(word -> word.replaceAll("[^a-zA-Z]", "")) //remove punctuations
+//                  .filter(word -> !word.isEmpty()).collect(Collectors.toList());
+//          for (String word: words) {
+//            ht.increase(word);
+//          }
+//        }
+//        ht.summarize("output" + i);
+//      } catch (IOException e) {
+//        e.printStackTrace();
+//      }
+//    }
     // part b tests
-//    MyHashTable ht2 = new MyHashTable(5);
-//    ht2.insert("abc", 1);
-//    ht2.insert("def", 1);
-//    ht2.insert("ghi", 1);
-//    ht2.insert("jkl", 1);
-//    ht2.insert("mno", 1);
-//    ht2.insert("pqr", 1);
-//    for (String str : ht2.listAllKeys()) {
-//      System.out.println(str);
-//    }
-//    ht2.increase("def");
-//    ht2.increase("mno");
-//    ht2.increase("mno");
-//    ht2.delete("abc");
-//    System.out.println(ht2.find("sss"));
-//    ht2.delete("sss"); // does not exist
-//    for (String str : ht2.listAllKeys()) {
-//      System.out.println(str);
-//    }
+    MyHashTable ht2 = new MyHashTable(5);
+    ht2.insert("abc", 1);
+    ht2.insert("def", 1);
+    ht2.insert("ghi", 1);
+    ht2.insert("jkl", 1);
+    ht2.insert("mno", 1);
+    ht2.insert("pqr", 1);
+    for (String str : ht2.listAllKeys()) {
+      System.out.println(str);
+    }
+    ht2.increase("def");
+    ht2.increase("mno");
+    ht2.increase("mno");
+    ht2.delete("abc");
+    System.out.println(ht2.find("sss"));
+    ht2.delete("sss"); // does not exist
+    for (String str : ht2.listAllKeys()) {
+      System.out.println(str);
+    }
   }
 }
