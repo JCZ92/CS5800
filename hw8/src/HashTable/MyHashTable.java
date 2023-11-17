@@ -175,7 +175,6 @@ public class MyHashTable implements IHashTable {
         String str = String.format("%s\n", len.get(i).toString());
         Files.write(filePath, str.getBytes(), StandardOpenOption.APPEND);
       }
-
     } catch (IOException e) {
       // Handle IOException
       e.printStackTrace();

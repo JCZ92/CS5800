@@ -20,7 +20,8 @@ public class BinomialTreeNode<K extends Comparable<K>, V> {
     this.val = val;
     this.degree = 0;
   }
-
+  public BinomialTreeNode() {
+  }
   /**
    * Link together with another Binomial node. The given node will be the child of current node.
    * @param other the node to link with
@@ -31,7 +32,10 @@ public class BinomialTreeNode<K extends Comparable<K>, V> {
     this.setChild(other);
     this.degree++;
   }
-
+  public void printNode(){
+//    BinomialTreeNode<K, V> current ;
+//    while ()
+  }
   public BinomialTreeNode<K, V> getParent() {
     return parent;
   }

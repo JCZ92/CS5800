@@ -101,9 +101,16 @@ public class MyBinomialHeap<K extends Comparable<K>, V> implements IBinomialHeap
         y = z;
         z = y.getParent();
       }
+    } else {
+      System.out.println("The new key should be smaller");
     }
   }
-
+  public void print(){
+    BinomialTreeNode<K, V> tmp = this.head;
+    if (tmp != null) {
+//      tmp.printNode();
+    }
+  }
   @Override
   public void delete(BinomialTreeNode<K, V> node, K minKey) {
     decreaseKey(node, minKey);
@@ -122,24 +129,31 @@ public class MyBinomialHeap<K extends Comparable<K>, V> implements IBinomialHeap
 
   public static void main(String[] args) {
     MyBinomialHeap<Integer, String> heap = new MyBinomialHeap<>();
+    int[] arr = new int[] {7,2,4,17,1,11,6,8,15,10,20,5};
+    for (int i: arr) {
+      BinomialTreeNode<Integer, String> tmp = new BinomialTreeNode<>(i, String.valueOf(i));
+      heap.insert(tmp);
+    }
+//
+
     // test decrease key and delete
-    BinomialTreeNode<Integer, String> node1 = new BinomialTreeNode<>(5, "5");
-    heap.insert(node1);
-    BinomialTreeNode<Integer, String> node2 = new BinomialTreeNode<>(2, "2");
-    heap.insert(node2);
-    BinomialTreeNode<Integer, String> node3 = new BinomialTreeNode<>(15, "15");
-    heap.insert(node3);
-    BinomialTreeNode<Integer, String> node4 = new BinomialTreeNode<>(4, "4");
-    heap.insert(node4);
-    BinomialTreeNode<Integer, String> node5 = new BinomialTreeNode<>(10, "10");
-    heap.insert(node5);
-    BinomialTreeNode<Integer, String> node6 = new BinomialTreeNode<>(1, "1");
-    heap.insert(node6);
-    System.out.println("minimum element is " + heap.minimum().getKey());
-    heap.decreaseKey(node3, 0);
-    System.out.println("minimum element is " + heap.minimum().getKey());
-    heap.delete(node3, -1000);
-    System.out.println("minimum element is " + heap.minimum().getKey());
+//    BinomialTreeNode<Integer, String> node1 = new BinomialTreeNode<>(5, "5");
+//    heap.insert(node1);
+//    BinomialTreeNode<Integer, String> node2 = new BinomialTreeNode<>(2, "2");
+//    heap.insert(node2);
+//    BinomialTreeNode<Integer, String> node3 = new BinomialTreeNode<>(15, "15");
+//    heap.insert(node3);
+//    BinomialTreeNode<Integer, String> node4 = new BinomialTreeNode<>(4, "4");
+//    heap.insert(node4);
+//    BinomialTreeNode<Integer, String> node5 = new BinomialTreeNode<>(10, "10");
+//    heap.insert(node5);
+//    BinomialTreeNode<Integer, String> node6 = new BinomialTreeNode<>(1, "1");
+//    heap.insert(node6);
+//    System.out.println("current minimum key is " + heap.minimum().getKey());
+//    heap.decreaseKey(node3, 0);
+//    System.out.println("After decrease one other key to 0, new minimum kwy is " + heap.minimum().getKey());
+//    heap.delete(heap.minimum(), -1000);
+//    System.out.println("After deleting the minimum key, new min key is " + heap.minimum().getKey());
     // part 2 insert and extractMin
 //    Random ran = new Random();
 //    for (int i = 0; i < 35; ++i) {

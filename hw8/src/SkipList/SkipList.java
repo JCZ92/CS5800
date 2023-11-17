@@ -76,6 +76,8 @@ public class SkipList implements ISkipList {
           topLeft = current.getLeft();//update top left
         }
       }
+    } else {
+      System.out.println("wont' add " + num  + "since it's already there ");
     }
   }
 
@@ -130,22 +132,23 @@ public class SkipList implements ISkipList {
     sl.print();
     sl.delete(20);
     sl.print();
-    sl.insert(100);
-    sl.print();
-    sl.insert(20);
-    sl.print();
-    sl.insert(30);
-    sl.print();
-    sl.delete(5);
-    sl.print();
-    sl.delete(0);
-    sl.print();
-    sl.delete(40);
-    sl.print();
-    sl.insert(50);
-    sl.print();
-    sl.delete(50);
-    sl.print();
+    sl.insert(2100);
+    System.out.println("find 2100 or not" + sl.lookup(2100))  ;
+//    sl.print();
+//    sl.insert(20);
+//    sl.print();
+//    sl.insert(30);
+//    sl.print();
+//    sl.delete(5);
+//    sl.print();
+//    sl.delete(0);
+//    sl.print();
+//    sl.delete(40);
+//    sl.print();
+//    sl.insert(50);
+//    sl.print();
+//    sl.delete(50);
+//    sl.print();
     System.out.println(sl.lookup(80));
     System.out.println(sl.lookup(7));
   }
