@@ -90,7 +90,7 @@ public interface IBinomialHeap<K extends Comparable<K>, V> {
           cur = next;
         }
       }
-      next = next.getSibling();
+      next = cur.getSibling();
     }
     return res;
   }

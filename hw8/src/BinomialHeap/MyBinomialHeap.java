@@ -1,5 +1,9 @@
 package BinomialHeap;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.Random;
 
 /**
@@ -106,10 +110,14 @@ public class MyBinomialHeap<K extends Comparable<K>, V> implements IBinomialHeap
     }
   }
   public void print(){
-    BinomialTreeNode<K, V> tmp = this.head;
-    if (tmp != null) {
-//      tmp.printNode();
+    if (this.head == null) return;
+    BinomialTreeNode<K, V> current = this.head;
+    while (current != null) {
+      current.printNode();
+      if (current.getSibling() != null)System.out.println("move to the tree with bigger order");
+      current = current.getSibling();
     }
+    System.out.println("");
   }
   @Override
   public void delete(BinomialTreeNode<K, V> node, K minKey) {
@@ -130,12 +138,28 @@ public class MyBinomialHeap<K extends Comparable<K>, V> implements IBinomialHeap
   public static void main(String[] args) {
     MyBinomialHeap<Integer, String> heap = new MyBinomialHeap<>();
     int[] arr = new int[] {7,2,4,17,1,11,6,8,15,10,20,5};
+    List<BinomialTreeNode<Integer, String>> nodes = new ArrayList<>();
     for (int i: arr) {
       BinomialTreeNode<Integer, String> tmp = new BinomialTreeNode<>(i, String.valueOf(i));
+      nodes.add(tmp);
       heap.insert(tmp);
+      heap.print();
     }
-//
+    System.out.println("After extract Min");
+    heap.extractMin();
+    heap.print();
 
+    // decrease 15 to 1
+    System.out.println("Decrease 15 to 1");
+    heap.decreaseKey(nodes.get(8), 1);
+    heap.print();
+
+    for (int i = 0; i < 12; ++i) {
+      System.out.println(nodes.get(i).getKey());
+    }
+    System.out.println("Delete 1");
+    heap.delete(nodes.get(1), -10000);
+    heap.print();
     // test decrease key and delete
 //    BinomialTreeNode<Integer, String> node1 = new BinomialTreeNode<>(5, "5");
 //    heap.insert(node1);

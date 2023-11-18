@@ -1,5 +1,8 @@
 package BinomialHeap;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * ClassName: BinomialTree
  * Package: BinomialHeap
@@ -32,9 +35,22 @@ public class BinomialTreeNode<K extends Comparable<K>, V> {
     this.setChild(other);
     this.degree++;
   }
-  public void printNode(){
-//    BinomialTreeNode<K, V> current ;
-//    while ()
+  public void printNode() {
+    Queue<BinomialTreeNode<K, V>> queue = new LinkedList<>();
+    queue.add(this);
+    while (!queue.isEmpty()) {
+      int size = queue.size();
+      for (int i = 0; i < size; ++i) {
+        BinomialTreeNode<K, V> poll = queue.poll();
+        System.out.print(poll.key + " ");
+        BinomialTreeNode<K, V> child = poll.child;
+        while (child != null) {
+          queue.add(child);
+          child = child.sibling;
+        }
+      }
+      System.out.println("");
+    }
   }
   public BinomialTreeNode<K, V> getParent() {
     return parent;
